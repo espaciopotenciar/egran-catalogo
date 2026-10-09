@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catálogo Mayorista Egran</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Source+Sans+3:wght@500;600;700&display=swap">
+<style>
+/* Layout: mismo lenguaje que distribuidores.egran.com.ar. Banda verde con título, intro blanca, banda de números con recuadros, sección menta con tarjetas de canal, grilla de productos, marca blanca y la empresa. Look claro único de marca, deliberado. */
+:root{
+  --verde:#005C36; --verde-osc:#004D2D; --verde-bot:#026241; --menta:#E8F4E1; --rojo:#A61919; --rojo-osc:#861313;
+  --blanco:#FFFFFF; --tinta:#212529; --gris:#5F6B66; --linea:#DDE6DA; --kraft:#C9A877; --kraft-osc:#9C7B4C;
+  --f-tit:"Source Sans 3","Source Sans Pro",system-ui,sans-serif;
+  --f-txt:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:20px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--blanco);color:var(--tinta);font-family:var(--f-txt);font-size:16px;line-height:1.6;margin:0}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--f-tit);font-weight:500;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--rojo);outline-offset:2px}
+.kicker{font-family:var(--f-txt);font-weight:300;font-size:25px;color:var(--verde);line-height:1.2}
+.kicker b{font-weight:400}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:100px;font-size:16px;padding:9px 26px;text-decoration:none;transition:background .15s}
+.btn-rojo{background:var(--rojo);border-color:var(--rojo);color:var(--blanco)}
+.btn-rojo:hover{background:var(--rojo-osc)}
+.btn-verde{background:var(--verde);border-color:var(--verde);color:var(--blanco)}
+.btn-verde:hover{background:var(--verde-osc)}
+.btn-borde{background:transparent;border-color:var(--verde);color:var(--verde)}
+.btn-borde:hover{background:var(--menta)}
+.resalte{background:var(--menta);padding:1px 6px;border-radius:4px}
+
+/* Header como egran.com.ar */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--blanco)}
+header.top .bar{display:flex;align-items:center;gap:24px;padding-block:10px}
+header.top img{height:46px;width:auto;display:block}
+header.top nav{display:flex;gap:22px;margin-left:auto}
+header.top nav a{text-decoration:none;color:var(--rojo);font-size:15px}
+header.top nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.sub-bar{background:var(--menta)}
+.sub-bar .wrap{display:flex;justify-content:space-between;gap:12px;padding-block:7px;font-size:13px;font-weight:600;color:var(--verde-osc)}
+@media (max-width:720px){header.top nav{gap:14px}header.top nav a{font-size:13.5px}header.top img{height:38px}.sub-bar .oc{display:none}}
+@media (max-width:420px){header.top nav a:nth-child(3){display:none}}
+
+/* Banda título */
+.banda{background:var(--verde-osc) url("img/banner.webp") center/cover;color:var(--blanco);text-align:center}
+.banda .wrap{padding-block:46px}
+.banda h1{font-size:clamp(28px,4.4vw,46px);color:var(--blanco)}
+
+/* Intro */
+.intro .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding-block:56px}
+.intro h2{font-size:clamp(34px,5vw,52px);color:var(--verde);font-weight:600}
+.intro .txt{margin-top:18px;color:var(--tinta);max-width:52ch}
+.intro .txt::before{content:"✴ ";color:var(--rojo)}
+.intro .acc{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px}
+.intro-img{border-radius:var(--r);overflow:hidden;position:relative;aspect-ratio:5/4;max-width:100%}
+.intro-img img{width:100%;height:100%;object-fit:cover;display:block}
+.sello{position:absolute;right:14px;bottom:14px;background:var(--blanco);border-radius:16px;padding:10px 14px;box-shadow:0 4px 16px rgba(0,0,0,.15);font-size:12.5px;line-height:1.3;max-width:220px;color:var(--tinta)}
+.sello b{display:block;font-family:var(--f-tit);font-size:24px;color:var(--rojo);font-weight:700}
+@media (max-width:860px){.intro .wrap{grid-template-columns:1fr;gap:26px;padding-block:36px}}
+
+/* Números */
+.numeros{background:var(--verde-osc);padding-block:40px}
+.numeros .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.num{background:var(--verde);color:var(--menta);border-radius:var(--r);padding:28px 16px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.num b{display:block;font-family:var(--f-tit);font-weight:500;font-size:46px;line-height:1.05;font-variant-numeric:tabular-nums}
+.num span{display:block;font-weight:600;font-size:15px;margin-top:6px;line-height:1.35}
+@media (max-width:820px){.numeros .wrap{grid-template-columns:1fr 1fr}.num b{font-size:36px}}
+
+/* Pregunta de canal */
+.pregunta{background:var(--menta);padding-block:60px}
+.pregunta h2{font-size:clamp(30px,4.2vw,46px);color:var(--verde-osc);margin-top:6px}
+.pregunta .bajada{color:var(--tinta);margin-top:10px;max-width:60ch}
+.canales{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:28px}
+.canal{all:unset;box-sizing:border-box;cursor:pointer;background:var(--blanco);border-radius:var(--r);padding:22px 18px 18px;display:flex;flex-direction:column;gap:12px;min-height:200px;box-shadow:0 2px 8px rgba(0,61,40,.06);transition:box-shadow .15s,transform .15s}
+.canal:hover{box-shadow:0 8px 22px rgba(0,61,40,.14);transform:translateY(-2px)}
+.canal:focus-visible{outline:3px solid var(--rojo);outline-offset:2px}
+.canal[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--verde),0 8px 22px rgba(0,61,40,.12)}
+.canal svg{width:40px;height:40px;color:var(--verde)}
+.canal .q{font-family:var(--f-tit);font-weight:600;font-size:20px;line-height:1.2;color:var(--verde-osc)}
+.canal .who{margin-top:auto;font-size:13px}
+.canal .who span{background:var(--menta);padding:2px 8px;border-radius:4px}
+.ver-todo{margin-top:18px;font-size:15px}
+.ver-todo button{all:unset;cursor:pointer;color:var(--rojo);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:1020px){.canales{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:620px){.canales{grid-template-columns:1fr 1fr}.canal{min-height:170px;padding:18px 14px}.canal .q{font-size:17.5px}}
+
+/* Vista de canal */
+.canal-vista{padding-block:56px 0}
+.canal-intro{display:grid;grid-template-columns:1fr 1fr;gap:30px;background:var(--verde-osc);color:var(--blanco);border-radius:var(--r);padding:34px}
+.canal-intro .kicker{color:var(--menta);font-size:20px}
+.canal-intro h2{font-size:clamp(28px,3.6vw,40px);color:var(--blanco);margin-top:8px}
+.canal-intro p.txt{color:#D6EBDD;margin-top:12px;max-width:52ch}
+.canal-intro ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;align-content:start}
+.canal-intro li{background:var(--verde);border-radius:14px;padding:12px 14px 12px 44px;position:relative;font-size:14.5px;line-height:1.45;color:var(--menta)}
+.canal-intro li::before{content:"✴";position:absolute;left:16px;top:11px;color:#FF9C8F}
+.canal-intro .mix{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;color:var(--menta)}
+.canal-intro .mix b{font-weight:600;margin-right:4px}
+.canal-intro .mix span{background:var(--menta);color:var(--verde-osc);border-radius:4px;padding:2px 9px}
+@media (max-width:820px){.canal-intro{grid-template-columns:1fr;padding:22px}}
+
+/* Catálogo */
+.catalogo{padding-block:56px 40px}
+.cat-head{display:flex;flex-wrap:wrap;gap:16px;align-items:end;justify-content:space-between;margin-bottom:18px}
+.cat-head h2{font-size:clamp(28px,3.6vw,40px);color:var(--verde-osc);margin-top:4px}
+.cat-head p{color:var(--gris);font-size:14px;margin-top:6px}
+.buscar{position:relative;flex:0 1 320px;min-width:0}
+.buscar input{width:100%;border:1px solid #C9D3CC;background:var(--blanco);border-radius:6.4px;padding:9px 14px 9px 40px;font:inherit;font-size:15px;color:var(--tinta)}
+.buscar svg{position:absolute;left:13px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--gris)}
+.filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{border:1px solid var(--verde);background:var(--blanco);color:var(--verde);border-radius:100px;padding:6px 16px;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--verde);color:var(--blanco)}
+.chip.sg{border-color:var(--rojo);color:var(--rojo)}
+.chip.sg[aria-pressed="true"]{background:var(--rojo);color:var(--blanco)}
+.grupo{margin-top:30px}
+.grupo:first-child{margin-top:0}
+.grupo h3{font-size:26px;color:var(--verde);font-weight:600;margin-bottom:14px;display:flex;align-items:baseline;gap:10px}
+.grupo h3 small{font-family:var(--f-txt);font-size:13px;color:var(--gris);font-weight:400}
+.grilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.card{all:unset;box-sizing:border-box;cursor:pointer;background:var(--blanco);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 0 1px var(--linea);transition:box-shadow .15s}
+.card:hover{box-shadow:0 0 0 1px var(--verde),0 8px 22px rgba(0,61,40,.10)}
+.card:focus-visible{outline:3px solid var(--rojo);outline-offset:2px}
+.card .foto{display:block;aspect-ratio:1/1;position:relative;background:var(--blanco)}
+.card .foto img{width:100%;height:100%;object-fit:contain;padding:14px;display:block}
+.badges{position:absolute;left:12px;top:12px;display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+.badge{font-size:11.5px;font-weight:600;border-radius:100px;padding:2px 10px;line-height:1.5}
+.b-sg{background:var(--rojo);color:var(--blanco)}
+.b-new{background:var(--verde);color:var(--blanco)}
+.b-25{background:var(--menta);color:var(--verde-osc)}
+.card .info{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;background:var(--blanco)}
+.card .pn{display:block;font-family:var(--f-tit);font-weight:600;font-size:19px;line-height:1.2;margin:0;color:var(--verde-osc)}
+.card .pitch{display:block;font-size:13.5px;color:var(--gris);line-height:1.45}
+.card .fmts{margin-top:auto;padding-top:8px;display:flex;flex-wrap:wrap;gap:5px}
+.card .fmts span{font-size:12.5px;background:var(--menta);color:var(--verde-osc);border-radius:4px;padding:1px 7px;font-variant-numeric:tabular-nums}
+.card .ver{display:block;font-size:13px;color:var(--rojo);margin-top:6px}
+.vacio{padding:40px;text-align:center;color:var(--gris);background:var(--menta);border-radius:var(--r)}
+
+/* Bolsa de harina dibujada */
+.bolsa{position:absolute;inset:14%;background:linear-gradient(180deg,#D8BC8E,var(--kraft));border-radius:10px 10px 18px 18px;box-shadow:inset 0 -10px 0 rgba(0,0,0,.06),0 10px 18px rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:10px}
+.bolsa::before{content:"";position:absolute;top:-6px;left:10%;right:10%;height:14px;background:var(--kraft-osc);border-radius:4px;clip-path:polygon(0 100%,5% 0,15% 100%,25% 0,35% 100%,45% 0,55% 100%,65% 0,75% 100%,85% 0,95% 100%,100% 0,100% 100%)}
+.bolsa .lg{font-weight:700;color:var(--rojo);font-size:15px;letter-spacing:.04em}
+.bolsa .nm{font-family:var(--f-tit);font-weight:700;color:var(--verde-osc);font-size:18px;line-height:1.05}
+.bolsa .kg{font-family:var(--f-tit);font-weight:700;color:var(--tinta);font-size:22px}
+
+/* Marca blanca */
+.mb-sec{background:var(--menta);padding-block:60px}
+.mb-sec h2{font-size:clamp(28px,3.8vw,44px);color:var(--tinta);margin-top:6px}
+.mb-box{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--blanco);border-radius:6.4px;padding:26px 36px}
+.mb-box p{color:var(--tinta)}
+.mb-box ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.mb-box li{font-size:15px;line-height:1.5}
+.mb-box li b{font-weight:700}
+@media (max-width:820px){.mb-box{grid-template-columns:1fr;padding:22px}}
+
+/* La empresa */
+.empresa{padding-block:60px}
+.empresa .cab{text-align:center;color:var(--verde);font-size:20px}
+.empresa h2{text-align:center;font-size:clamp(28px,3.8vw,44px);color:var(--verde-osc);margin-top:6px}
+.empresa .lead{text-align:center;max-width:70ch;margin:14px auto 0;color:var(--tinta)}
+.empresa .foto-planta{margin-top:28px;border-radius:var(--r);overflow:hidden;aspect-ratio:16/5;max-width:100%}
+.empresa .foto-planta img{width:100%;height:100%;object-fit:cover;display:block}
+.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.cert{background:var(--menta);border-radius:var(--r);padding:22px}
+.cert b{font-family:var(--f-tit);font-size:24px;font-weight:600;color:var(--verde);display:block}
+.cert p{font-size:14.5px;margin-top:6px}
+@media (max-width:820px){.certs{grid-template-columns:1fr}.empresa .foto-planta{aspect-ratio:16/8}}
+.voces{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px;margin-top:30px}
+.voz{background:var(--verde-osc);color:var(--menta);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:14px}
+.voz blockquote{margin:0;font-size:15px;line-height:1.55}
+.voz blockquote::before{content:"“";display:block;font-family:var(--f-tit);font-size:52px;line-height:.6;color:#FF9C8F}
+.voz cite{font-style:normal;font-size:13px;margin-top:auto;color:#BFDCC9}
+.voz cite b{display:block;color:var(--blanco);font-weight:600}
+@media (max-width:900px){.voces{grid-template-columns:1fr}}
+.cadenas{margin-top:30px;text-align:center;font-size:14px;color:var(--gris)}
+.cadenas div{margin-top:10px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px}
+.cadenas span{font-family:var(--f-tit);font-weight:600;font-size:20px;color:var(--verde-osc)}
+
+/* Ficha */
+.velo{position:fixed;inset:0;background:rgba(0,40,25,.45);z-index:60}
+.ficha{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--blanco);z-index:61;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,.2);padding:calc(env(safe-area-inset-top,0px) + 16px) 22px calc(env(safe-area-inset-bottom,0px) + 24px);display:flex;flex-direction:column;gap:16px}
+.ficha>*{flex-shrink:0}
+.ficha .cerrar{align-self:flex-end;border:1px solid var(--verde);background:var(--blanco);color:var(--verde);border-radius:100px;padding:5px 16px;font-size:14px}
+.ficha .ffoto{position:relative;aspect-ratio:16/11;background:var(--blanco);border-radius:var(--r);box-shadow:0 0 0 1px var(--linea);overflow:hidden}
+.ficha .ffoto img{width:100%;height:100%;object-fit:contain;padding:14px}
+.ficha h3{font-size:30px;color:var(--verde-osc);font-weight:600}
+.ficha .cat{font-weight:300;font-size:17px;color:var(--verde)}
+.ficha .pitch{font-weight:600}
+.ficha .desc{color:var(--gris);font-size:15px}
+.tabla{border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px var(--linea)}
+.tabla table{width:100%;border-collapse:collapse;font-size:14.5px}
+.tabla th{background:var(--verde);color:var(--blanco);text-align:left;font-weight:500;font-size:13.5px;padding:9px 12px}
+.tabla td{padding:9px 12px;border-top:1px solid var(--linea)}
+.tabla tr:nth-child(even) td{background:#F6FAF3}
+.tabla td.cod{font-family:var(--f-tit);font-weight:700;font-size:19px;color:var(--verde-osc);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tabla td.pend{font-size:12.5px;color:var(--gris)}
+.ideal{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13.5px}
+.ideal span{background:var(--menta);color:var(--verde-osc);border-radius:4px;padding:2px 9px}
+.nota{font-size:13px;background:var(--menta);border-radius:10px;padding:10px 12px;color:var(--verde-osc)}
+
+footer{background:var(--verde-osc);color:var(--menta);padding-block:28px;font-size:13.5px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 30px;justify-content:space-between;align-items:center}
+footer b{color:var(--blanco);font-weight:600}
+
+/* ===== Tapa de catálogo ===== */
+.barra{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--blanco);box-shadow:0 1px 0 var(--linea)}
+.barra .wrap{display:flex;align-items:center;gap:14px;padding-block:8px}
+.barra .bl img{height:38px;width:auto;display:block}
+.barra .bt{font-family:var(--f-tit);font-weight:500;font-size:18px;color:var(--verde-osc);white-space:nowrap}
+.barra .bt b{color:var(--rojo);font-weight:700}
+.ed-pill{background:var(--menta);color:var(--verde-osc);border-radius:100px;padding:3px 12px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.barra .bi{margin-left:auto;color:var(--rojo);font-size:15px;text-decoration:none;white-space:nowrap}
+.barra .bi:hover{text-decoration:underline;text-underline-offset:4px}
+@media (max-width:640px){.barra .bt{font-size:15.5px}.ed-pill{display:none}}
+@media (max-width:380px){.barra .bt b{display:none}}
+.tapa{position:relative;background:var(--verde-osc);color:var(--blanco);overflow:hidden}
+.tapa::before{content:"";position:absolute;inset:0;background:url("img/banner.webp") center/cover;opacity:.6}
+.tapa::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-150px;height:240px;background:var(--rojo);border-radius:50%;transform:rotate(-3deg)}
+.tapa .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;padding-block:44px 150px}
+.marca{display:flex;align-items:center;gap:16px}
+.marca img{height:74px;width:auto;background:var(--blanco);border-radius:16px;padding:8px 14px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.marca span{font-size:13px;color:var(--menta);border-left:1px solid rgba(232,244,225,.4);padding-left:16px;line-height:1.4}
+.tapa h1{font-family:var(--f-tit);font-weight:700;font-size:clamp(48px,7.4vw,92px);line-height:.95;letter-spacing:-.015em;margin-top:28px;color:var(--blanco)}
+.tapa h1 .anio{display:block;font-size:1.22em;color:var(--menta)}
+@supports (-webkit-text-stroke:2px #fff){.tapa h1 .anio{color:transparent;-webkit-text-stroke:2px var(--menta)}}
+.tapa .ed{margin-top:18px;font-size:17px;color:var(--menta)}
+.sellos{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.sellos span{border:1px solid rgba(232,244,225,.45);border-radius:100px;padding:5px 14px;font-size:13px;color:var(--blanco);background:rgba(0,0,0,.12)}
+.packs{position:relative;aspect-ratio:1/1;width:100%;max-width:470px;justify-self:end}
+.pk{position:absolute;width:46%;filter:drop-shadow(0 18px 24px rgba(0,0,0,.35));transition:transform .4s}
+.pk1{left:2%;top:16%;transform:rotate(-12deg)}
+.pk2{left:28%;top:0;width:50%;transform:rotate(3deg);z-index:2}
+.pk3{right:0;top:20%;transform:rotate(11deg)}
+.pk4{left:24%;bottom:2%;width:44%;transform:rotate(-4deg);z-index:3}
+@media (hover:hover){.packs:hover .pk1{transform:rotate(-16deg) translateX(-8px)}.packs:hover .pk3{transform:rotate(15deg) translateX(8px)}}
+.contador{position:absolute;right:2%;bottom:6%;z-index:4;width:132px;height:132px;border-radius:50%;background:var(--blanco);color:var(--verde-osc);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:13px;line-height:1.3;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.contador b{font-family:var(--f-tit);font-size:42px;line-height:1;color:var(--rojo)}
+@media (max-width:860px){.tapa .wrap{grid-template-columns:1fr;padding-block:28px 140px}.packs{max-width:340px;justify-self:center;margin-top:6px}.marca img{height:56px}.contador{width:112px;height:112px}.contador b{font-size:34px}}
+/* Edición */
+.edicion{position:relative;z-index:2;margin-top:-110px}
+.ed-card{background:var(--blanco);border-radius:var(--r);box-shadow:0 18px 50px rgba(0,40,25,.18);padding:30px}
+.ed-card h2{font-size:clamp(26px,3.6vw,40px);color:var(--verde-osc);margin-top:6px}
+.ed-card .bajada{margin-top:8px;max-width:64ch;color:var(--tinta)}
+.ed-card .canales{margin-top:22px}
+.ed-card .canal{background:var(--menta);box-shadow:none}
+.ed-card .canal:hover{box-shadow:0 8px 22px rgba(0,61,40,.14)}
+.ed-card .canal .who span{background:var(--blanco)}
+.ed-card .canal[aria-pressed="true"]{background:var(--verde-osc);box-shadow:none}
+.ed-card .canal[aria-pressed="true"] svg,.ed-card .canal[aria-pressed="true"] .q{color:var(--blanco)}
+@media (max-width:620px){.ed-card{padding:20px 16px}}
+/* Índice */
+.indice{padding-block:50px 10px}
+.ind-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start}
+.indice h2{font-size:clamp(26px,3.4vw,38px);color:var(--verde-osc);margin-top:4px}
+.caps{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--linea)}
+.caps a{display:grid;grid-template-columns:56px 1fr auto 22px;gap:12px;align-items:center;padding:13px 4px;border-bottom:1px solid var(--linea);text-decoration:none;color:var(--tinta)}
+.caps a:hover{background:#F6FAF3}
+.caps .nro{font-family:var(--f-tit);font-weight:700;font-size:28px;color:var(--rojo);font-variant-numeric:tabular-nums}
+.caps .nom{font-family:var(--f-tit);font-weight:600;font-size:21px;color:var(--verde-osc)}
+.caps .cant{font-size:13px;color:var(--gris);white-space:nowrap}
+.caps .fl{color:var(--verde)}
+.leer{background:var(--menta);border-radius:var(--r);padding:22px}
+.leer .lt{font-family:var(--f-tit);font-weight:600;font-size:20px;color:var(--verde-osc)}
+.leer ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px;font-size:14px}
+.tag-demo{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;background:var(--verde-osc);color:var(--blanco);border-radius:12px;overflow:hidden;font-size:13.5px;text-align:center}
+.tag-demo span{padding:8px 6px;border-right:1px solid rgba(255,255,255,.18)}
+.tag-demo span small{display:block;font-size:11px;color:var(--menta)}
+.tag-demo em{font-style:normal;padding:6px;border-top:1px solid rgba(255,255,255,.18);border-right:1px solid rgba(255,255,255,.18);font-size:12px;color:var(--menta)}
+.tag-demo em b{font-family:var(--f-tit);font-size:18px;color:var(--blanco);margin-left:4px}
+@media (max-width:860px){.ind-grid{grid-template-columns:1fr}.caps a{grid-template-columns:40px 1fr 18px}.caps .cant{grid-column:2;grid-row:2;white-space:normal}.caps .fl{grid-row:1/3;grid-column:3}.caps .nro{font-size:23px;grid-row:1/3}.caps .nom{font-size:18px}}
+/* Capítulos */
+.grupo{scroll-margin-top:70px}
+.grupo h3 .nro{color:var(--rojo);font-weight:700;margin-right:2px}
+/* Logos */
+.cadenas .logos{margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;align-items:center}
+.cadenas .logos img{height:46px;width:auto;max-width:100%}
+.mb-logos{margin-top:26px;text-align:center;color:var(--gris);font-size:14px}
+.mb-logos .logos img{height:44px}
+@media (max-width:620px){.cadenas .logos img{height:34px}}
+.barra .bm{display:none}
+
+/* ===== Celular: simple y compacto ===== */
+@media (max-width:640px){
+  body{font-size:15px}
+  .wrap{padding-inline:16px}
+  .kicker{font-size:15px}
+  /* Barra */
+  .barra .wrap{padding-block:6px;gap:10px}
+  .barra .bl img{height:30px}
+  .barra .bt{font-size:15px}
+  .barra .bi{display:none}
+  .barra .bm{display:inline;margin-left:auto;font-size:14px}
+  /* Tapa corta */
+  .tapa .wrap{grid-template-columns:1fr 112px;gap:12px;padding-block:20px 72px;align-items:end}
+  .tapa::after{bottom:-190px}
+  .marca{grid-column:1/-1}
+  .marca img{height:44px;padding:5px 10px;border-radius:12px}
+  .marca span{font-size:11.5px;padding-left:12px}
+  .tapa-txt{display:contents}
+  .tapa h1{grid-column:1;font-size:36px;margin-top:4px;line-height:1}
+  .tapa h1 .anio{font-size:1.25em}
+  .tapa .ed{grid-column:1/-1;font-size:13.5px;margin-top:0}
+  .sellos{grid-column:1/-1;margin-top:0;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}
+  .sellos::-webkit-scrollbar{display:none}
+  .sellos span{font-size:12px;padding:4px 10px;white-space:nowrap}
+  .packs{grid-column:2;grid-row:2/3;max-width:112px;width:112px;margin:0;justify-self:end;aspect-ratio:1/1.15}
+  .pk1,.pk3,.pk4{display:none}
+  .pk2{left:0;top:0;width:100%;transform:rotate(4deg)}
+  .contador{display:none}
+  /* Edición como lista */
+  .edicion{margin-top:-52px}
+  .ed-card{padding:18px 14px;border-radius:16px}
+  .ed-card h2{font-size:23px}
+  .ed-card .bajada{font-size:13.5px}
+  .ed-card .canales{grid-template-columns:1fr;gap:8px;margin-top:14px}
+  .ed-card .canal{display:grid;grid-template-columns:34px 1fr 14px;grid-template-rows:auto auto;column-gap:12px;row-gap:2px;align-items:center;min-height:0;padding:12px 14px;border-radius:12px}
+  .ed-card .canal svg{width:30px;height:30px;grid-row:1/3}
+  .ed-card .canal .q{font-size:16px;grid-column:2}
+  .ed-card .canal .who{grid-column:2;margin:0;font-size:12px}
+  .ed-card .canal .who span{background:none;padding:0;color:var(--gris)}
+  .ed-card .canal[aria-pressed="true"] .who span{color:var(--menta)}
+  .ed-card .canal::after{content:"›";grid-column:3;grid-row:1/3;font-size:24px;line-height:1;color:var(--verde)}
+  .ed-card .canal[aria-pressed="true"]::after{color:var(--blanco)}
+  .ver-todo{font-size:13.5px;margin-top:12px}
+  /* Índice: en celular lo reemplazan las pestañas */
+  .indice{display:none}
+  /* Edición elegida */
+  .canal-vista{padding-block:22px 0}
+  .canal-intro{padding:18px;gap:12px;border-radius:16px}
+  .canal-intro .kicker{font-size:14px}
+  .canal-intro h2{font-size:23px}
+  .canal-intro p.txt{font-size:14px}
+  .canal-intro ul{gap:6px}
+  .canal-intro li{font-size:13.5px;padding:9px 12px 9px 34px;border-radius:10px}
+  .canal-intro li::before{left:12px;top:8px}
+  .canal-intro .mix{font-size:12.5px;gap:6px}
+  /* Catálogo */
+  .catalogo{padding-block:24px 30px}
+  .cat-head{display:block;margin-bottom:10px}
+  .cat-head .kicker{display:none}
+  .cat-head h2{font-size:24px}
+  .cat-head p{font-size:12.5px;margin-top:2px}
+  .buscar{display:block;margin-top:12px}
+  .buscar input{font-size:16px;padding:10px 14px 10px 40px;border-radius:12px}
+  .filtros{position:sticky;top:calc(env(safe-area-inset-top,0px) + 46px);z-index:30;background:var(--blanco);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -16px 14px;padding:10px 16px;box-shadow:0 1px 0 var(--linea)}
+  .filtros::-webkit-scrollbar{display:none}
+  .chip{white-space:nowrap;font-size:13.5px;padding:6px 14px;flex:none}
+  .grupo{margin-top:22px;scroll-margin-top:110px}
+  .grupo h3{font-size:20px;margin-bottom:8px}
+  .grilla{grid-template-columns:1fr;gap:8px}
+  /* Producto en fila */
+  .card{flex-direction:row;align-items:center;border-radius:14px;min-height:96px}
+  .card .foto{flex:none;width:88px;aspect-ratio:1/1;border-right:1px solid var(--linea)}
+  .card .foto img{padding:6px}
+  .card .badges{left:4px;top:4px;gap:3px}
+  .card .badge{font-size:9.5px;padding:1px 6px}
+  .card .b-25{display:none}
+  .card .info{padding:10px 12px;gap:3px;min-width:0}
+  .card .pn{font-size:16.5px}
+  .card .pitch{font-size:12.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .card .fmts{padding-top:4px;gap:4px}
+  .card .fmts span{font-size:11.5px}
+  .card .ver{display:none}
+  .card::after{content:"›";flex:none;padding-right:12px;font-size:26px;color:var(--verde);line-height:1}
+  .bolsa{inset:10%;border-radius:6px 6px 10px 10px;padding:4px}
+  .bolsa::before{height:8px;top:-4px}
+  .bolsa .lg{font-size:8px}
+  .bolsa .nm{font-size:9px}
+  .bolsa .kg{font-size:11px}
+  /* Ficha a pantalla completa */
+  .ficha{width:100%;padding-inline:16px;gap:12px}
+  .ficha .ffoto{aspect-ratio:16/10}
+  .ficha h3{font-size:25px}
+  .ficha .desc{font-size:14px}
+  .tabla table{font-size:13.5px}
+  .tabla th,.tabla td{padding:8px 10px}
+  .tabla td.cod{font-size:17px}
+  /* Marca blanca y empresa */
+  .mb-sec,.empresa{padding-block:34px}
+  .mb-sec h2,.empresa h2{font-size:24px}
+  .mb-box{padding:16px;gap:12px;margin-top:14px}
+  .mb-box p,.mb-box li{font-size:14px}
+  .empresa .cab{font-size:15px}
+  .empresa .lead{font-size:14px;text-align:left}
+  .empresa h2{text-align:left}
+  .empresa .cab{text-align:left}
+  .empresa .foto-planta{margin-top:16px;aspect-ratio:16/9;border-radius:14px}
+  .certs{gap:8px;margin-top:14px}
+  .cert{padding:14px;border-radius:14px}
+  .cert b{font-size:19px}
+  .cert p{font-size:13px}
+  .voces{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:20px -16px 0;padding:0 16px 4px;scrollbar-width:none}
+  .voces::-webkit-scrollbar{display:none}
+  .voz{flex:0 0 84%;scroll-snap-align:start;padding:18px;border-radius:14px}
+  .voz blockquote{font-size:13.5px}
+  .cadenas{font-size:13px;text-align:left}
+  .cadenas .logos{display:grid;grid-template-columns:1fr;gap:14px;justify-items:center}
+  .cadenas .logos img{height:auto;width:100%;max-width:300px}
+  footer{font-size:12.5px;padding-block:20px}
+}
+</style>
+
+</head>
+<body>
+<header class="barra">
+  <div class="wrap">
+    <a href="#tapa" class="bl"><img src="img/logo.webp" alt="Egran, desde 1938"></a>
+    <span class="bt">Catálogo de productos <b>2026</b></span>
+    <span class="ed-pill" id="ed-pill" hidden></span>
+    <a class="bi" href="#indice">Índice</a>
+    <a class="bi bm" href="#catalogo">Ver productos</a>
+  </div>
+</header>
+
+<section class="tapa" id="tapa">
+  <div class="wrap">
+    <div class="tapa-txt">
+      <div class="marca"><img src="img/logo.webp" alt=""><span>Molino Passerini S.A.I.C.<br>Córdoba, Argentina</span></div>
+      <h1>Catálogo de productos <span class="anio">2026</span></h1>
+      <p class="ed">Canal mayorista · Distribución · Retail · Industria</p>
+      <div class="sellos"><span>88 años de trayectoria</span><span>FSSC 22000</span><span>Línea Sin TACC</span><span>Mejores Empresas de Argentina 2025</span></div>
+    </div>
+    <div class="packs" aria-hidden="true">
+      <img class="pk pk1" src="img/p107.webp" alt="">
+      <img class="pk pk2" src="img/p137.webp" alt="">
+      <img class="pk pk3" src="img/p101.webp" alt="">
+      <img class="pk pk4" src="img/p105.webp" alt="">
+      <div class="contador"><b id="n-prod">51</b>productos<br><span id="n-pres">95</span> presentaciones</div>
+    </div>
+  </div>
+</section>
+
+<section class="edicion" id="pregunta">
+  <div class="wrap">
+    <div class="ed-card">
+      <p class="kicker"><b>Armá tu edición del catálogo</b></p>
+      <h2>Imaginá Egran en tu negocio. ¿Dónde lo ves?</h2>
+      <p class="bajada">Elegí la escena que más se parece a tu día a día y el catálogo se ordena con los productos, formatos y surtido pensados para tu canal.</p>
+      <div class="canales" id="canales"></div>
+      <p class="ver-todo">¿Preferís verlo todo? <button type="button" id="ver-todo">Abrir la edición completa</button> o buscá por nombre o código.</p>
+    </div>
+  </div>
+</section>
+
+<section class="indice" id="indice">
+  <div class="wrap ind-grid">
+    <div>
+      <p class="kicker"><b>Índice</b></p>
+      <h2 id="ind-titulo">Edición completa</h2>
+      <ol class="caps" id="caps"></ol>
+    </div>
+    <aside class="leer">
+      <p class="lt">Cómo leer este catálogo</p>
+      <div class="tag-demo"><span><small>Bolsón</small>10 × 500 g</span><span><small>Bolsa</small>25 kg</span><em>Código <b>2500</b></em><em><b>2530</b></em></div>
+      <ul>
+        <li><b>Bulto:</b> cómo viaja el producto. “Bolsón 10 × 500 g” son 10 paquetes de 500 g.</li>
+        <li><b>Código:</b> el número de cada presentación para tu orden de compra.</li>
+        <li><span class="badge b-sg">Sin TACC</span> aptos para celíacos, con el símbolo oficial en el envase.</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="canal-vista" id="canal-vista" hidden>
+  <div class="wrap"><div class="canal-intro" id="canal-intro"></div></div>
+</section>
+
+<section class="catalogo" id="catalogo">
+  <div class="wrap">
+    <div class="cat-head">
+      <div>
+        <p class="kicker"><b>Portafolio</b></p>
+        <h2 id="cat-titulo">Todos nuestros productos</h2>
+        <p id="cat-sub"></p>
+      </div>
+      <label class="buscar" for="q">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Buscar por producto o código" aria-label="Buscar por producto o código" autocomplete="off">
+      </label>
+    </div>
+    <div class="filtros" id="filtros"></div>
+    <div id="grupos"></div>
+  </div>
+</section>
+
+<section class="mb-sec" id="marca-blanca">
+  <div class="wrap">
+    <p class="kicker"><b>Marca blanca | Private label</b></p>
+    <h2>Tu producto, con 88 años de experiencia detrás.</h2>
+    <div class="mb-box">
+      <p>Desarrollamos productos de marca propia para supermercados, distribuidores y empresas de alimentos de todo el país. Ponemos a disposición nuestra trayectoria en la industria molinera, una planta certificada FSSC 22000, IRAM, Kosher y APSAL, y un equipo que acompaña cada etapa del desarrollo.</p>
+      <ul>
+        <li><b>Formulación:</b> desarrollamos o adaptamos la receta según tu marca y tu objetivo de producto.</li>
+        <li><b>Producción:</b> elaboramos con los mismos estándares certificados que respaldan a Egran.</li>
+        <li><b>Envasado:</b> adaptamos presentación y packaging a la identidad de tu marca.</li>
+        <li><b>Control de calidad:</b> cada lote pasa por los mismos controles auditados que nuestra propia marca.</li>
+      </ul>
+    </div>
+    <div class="cadenas mb-logos"><p>Confían en nosotros para producir sus marcas propias</p>
+      <div class="logos"><img src="img/cli-36.webp" alt="Nat (Farmacity) y Coto"><img src="img/cli-37.webp" alt="La Anónima y Check"><img src="img/cli-38.webp" alt="Carrefour Classic y Cooperativa Obrera"><img src="img/cli-40.webp" alt="Cuisine & Co y Dia"></div>
+    </div>
+  </div>
+</section>
+
+<section class="empresa" id="empresa">
+  <div class="wrap">
+    <p class="cab">✽ La empresa ✽</p>
+    <h2>Molino Passerini S.A.I.C.</h2>
+    <p class="lead">Empresa familiar fundada en 1938 en Córdoba. Tres generaciones de producción continua de harinas, cereales, legumbres y snacks, en una planta propia de más de 6.000 m² sobre 2,5 hectáreas. Egran es nuestra marca comercial y está presente en supermercados, dietéticas, distribuidoras y gastronomía de todo el país.</p>
+    <div class="foto-planta"><img src="img/planta.webp" alt="Planta de Molino Passerini en Córdoba"></div>
+    <div class="certs">
+      <div class="cert"><b>FSSC 22000</b><p>Uno de los esquemas de inocuidad más exigentes del mundo, reconocido por GFSI y requerido por las grandes cadenas. Certificamos desde 2014.</p></div>
+      <div class="cert"><b>Línea Sin TACC</b><p>Productos aptos para celíacos con el símbolo oficial en el envase: avena, harinas, almidón, fécula, barras, inflados y Tutuca®.</p></div>
+      <div class="cert"><b>IRAM · Kosher · APSAL</b><p>Certificaciones que suman respaldo a cada proceso y abren la puerta a clientes y mercados que las requieren.</p></div>
+    </div>
+    <div class="voces">
+      <div class="voz">
+        <blockquote>Con Egran trabajamos desde hace 20 años. Para una cadena como Cordiez es clave tener un proveedor que garantice calidad y stock permanente en góndola. Egran nos acompaña en lanzamientos, promos, reposición y está atento a las necesidades de cada sucursal.</blockquote>
+        <cite><b>Cordiez</b>Cadena de supermercados de Córdoba</cite>
+      </div>
+      <div class="voz">
+        <blockquote>En el rubro legumbres, son nuestro aliado más importante. La atención comercial es excelente.</blockquote>
+        <cite><b>Jesús Diego</b>Gerente Regional, cliente desde hace más de 20 años</cite>
+      </div>
+      <div class="voz">
+        <blockquote>Hace 40 años que trabajamos junto a Egran. Destacamos la calidez, la rapidez para responder y la predisposición para encontrar soluciones.</blockquote>
+        <cite><b>Comprador</b>Cliente con 40 años de relación comercial</cite>
+      </div>
+    </div>
+    <div class="cadenas"><p>Nos encontrás en las principales cadenas del país</p>
+      <div class="logos"><img src="img/cli-29.webp" alt="Jumbo, Disco y Vea"><img src="img/cli-30.webp" alt="Coto, Changomás y Carrefour"><img src="img/cli-31.webp" alt="Delfín, La Anónima y Aiello"><img src="img/cli-32.webp" alt="Top, Mariano Max y otras cadenas"><img src="img/cli-33.webp" alt="Yaguar, Super Mami y Buenos Días"><img src="img/cli-34.webp" alt="Tadicor y Cordiez"><img src="img/cli-35.webp" alt="Don Emilio y otras cadenas regionales"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span><b>Egran · Molino Passerini S.A.I.C.</b> · Av. Circunvalación 1288 (Sureste), Córdoba</span>
+    <span>0800 444 3472 · ventas@egran.com.ar</span>
+  </div>
+</footer>
+
+<div class="velo" id="velo" hidden></div>
+<aside class="ficha" id="ficha" hidden role="dialog" aria-modal="true" aria-labelledby="ficha-t"></aside>
+
+<script>
+const PEND = 'a confirmar';
+const CANALES = {
+  s:{id:'supermercados', n:'Supermercados y cadenas', q:'En la góndola de mi supermercado', ico:'gondola',
+     titulo:'Góndola que rota, proveedor que repone.',
+     txt:'Una marca que el consumidor conoce desde hace 88 años, con todo el surtido de almacén seco en un solo proveedor y un equipo que acompaña cada sucursal.',
+     pts:['Legumbres, cereales, snacks Sin TACC y comidas listas: una sola negociación para varias categorías.','Acompañamiento en lanzamientos, promociones y reposición, con stock permanente.','Planta certificada FSSC 22000, el estándar que piden las grandes cadenas.','Desarrollo de marca blanca con la misma calidad que Egran.'],
+     mix:['Legumbres 10 × 400 g','Polentas y avenas','Tutuca® y barras de arroz','Comidas listas 12 × 500 g']},
+  d:{id:'distribuidores', n:'Distribuidores y mayoristas', q:'En mi depósito, listo para salir a reparto', ico:'camion',
+     titulo:'Todo el portfolio Egran en un solo camión.',
+     txt:'Productos de alta rotación en bultos cerrados, pensados para abastecer almacenes, autoservicios, kioscos y dietéticas de tu zona.',
+     pts:['Bolsones de 10 unidades, bolsas de 5 kg y de 25 kg para cada tipo de cliente.','Legumbres de alta rotación todo el año y picos de demanda en fechas patrias.','Snacks y Tutuca® en cajas listas para exhibir en el kiosco.','Un representante comercial por zona que acompaña cada pedido.'],
+     mix:['Lentejas y porotos','Maíz pelado y pisingallo','Barras de arroz','Tutuca®']},
+  i:{id:'industria', n:'Industria alimentaria', q:'Entrando a mi línea de producción', ico:'fabrica',
+     titulo:'Materia prima con la trazabilidad de una planta certificada.',
+     txt:'Harinas, almidones, granos y legumbres en bolsas de 25 kg para panificados, premezclas, snacks, sopas y productos plant-based.',
+     pts:['Línea de harinas de legumbres y de arroz Sin TACC en bolsa de 25 kg.','Granos, almidón y salvado con calidad pareja lote a lote.','Gestión de inocuidad FSSC 22000 y documentación de calidad para tu auditoría.','Capacidad de desarrollo para formatos y especificaciones a medida.'],
+     mix:['Harinas Sin TACC 25 kg','Almidón de maíz 25 kg','Avenas 25 kg','Trigo y maíz pelado 25 kg']},
+  f:{id:'food-service', n:'Food service y gastronomía', q:'En la cocina, cuando servimos cientos de platos', ico:'olla',
+     titulo:'Rendimiento para cocinar a escala.',
+     txt:'Restaurantes, comedores, concesionarios, empresas de viandas y compras institucionales encuentran en Egran formatos grandes y productos que rinden en la olla.',
+     pts:['Legumbres y cereales en 5 y 25 kg para cocinas de alto volumen.','Comidas listas de 500 g para resolver un plato en minutos.','Opciones Sin TACC para armar menús aptos para celíacos.','Experiencia en licitaciones públicas y privadas.'],
+     mix:['Polenta 25 kg','Lentejas y garbanzos 25 kg','Locro y guiso listos','Avena 25 kg']},
+  h:{id:'dieteticas', n:'Dietéticas y tiendas naturales', q:'En los frascos y estantes de mi dietética', ico:'frasco',
+     titulo:'Granel de calidad para el cliente que se cuida.',
+     txt:'Todo lo que tu cliente busca a granel y en la línea Sin TACC, en formatos que te dejan fraccionar con margen.',
+     pts:['Legumbres, burgol, avena y salvado en 5 y 25 kg para fraccionar.','Harinas de legumbres y de arroz Sin TACC.','Avena sin gluten, inflados de arroz y Yamaní integral.','Barras de arroz y Tutuca® Sin TACC para la caja.'],
+     mix:['Avena sin gluten','Harinas Sin TACC','Trigo burgol','Arroz Yamaní inflado']}
+};
+const ICONS = {
+  gondola:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 6v28M34 6v28M6 14h28M6 24h28M6 34h28"/><rect x="9" y="8" width="5" height="6"/><rect x="16" y="9" width="4" height="5"/><rect x="23" y="8" width="7" height="6"/><rect x="9" y="18" width="7" height="6"/><rect x="18" y="17" width="5" height="7"/><rect x="25" y="18" width="5" height="6"/><rect x="9" y="28" width="4" height="6"/><rect x="15" y="27" width="7" height="7"/><rect x="24" y="28" width="6" height="6"/></svg>',
+  camion:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 10h22v18H3zM25 16h7l5 6v6H25z"/><circle cx="10" cy="30" r="3.2" fill="#fff"/><circle cx="30" cy="30" r="3.2" fill="#fff"/><path d="M8 15h6v6H8zM15 15h6v6h-6z"/></svg>',
+  fabrica:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 34V18l9 5v-5l9 5v-5l9 5V8h5v26z"/><path d="M9 28h4M18 28h4M27 28h4"/></svg>',
+  olla:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h28v8a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8z"/><path d="M3 18h34M15 13c0-3 2-3 2-6M21 13c0-3 2-3 2-6M27 13c0-3 2-3 2-6"/></svg>',
+  frasco:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M10 6h10v4H10zM8 10h14v24H8zM24 16h10v18H24zM25 12h8v4h-8z"/><path d="M8 20h14M24 24h10"/></svg>'
+};
+const CATS = {cer:'Cereales y almidones', har:'Harinas', leg:'Legumbres', snk:'Snacks y Tutuca®', com:'Comidas listas'};
+
+// [presentación, bulto, código]
+const P = [
+ {id:89,n:'Polenta cocción rápida',c:'cer',ch:'sdf',p:'Lista en minutos, cremosa y sin grumos.',d:'Harina de maíz de cocción rápida que logra una polenta suave en pocos minutos. Aporta 0 mg de sodio y bajo contenido de grasas. Resuelve el plato en la mesa familiar y en la cocina profesional.',pr:[['500 g','Bolsón 10 × 500 g','2200'],['25 kg','Bolsa 25 kg','2230']]},
+ {id:90,n:'Polenta tradicional',c:'cer',ch:'sdfh',p:'La receta de los fundadores, en cuatro formatos.',d:'Sémola fina de maíz inspirada en la receta italiana de la familia Passerini. Sirve para polenta cremosa, frita o al horno, y cubre desde la góndola hasta la cocina de gran volumen.',pr:[['500 g','Bolsón 10 × 500 g','2500'],['1 kg','Bolsón 10 × 1 kg','2501'],['5 kg','Bolsa 5 kg','2505'],['25 kg','Bolsa 25 kg','2530']]},
+ {id:93,n:'Sémola de trigo candeal',c:'cer',ch:'sdf',p:'Textura fina y pareja para ñoquis y postres.',d:'Sémola de trigo candeal de molienda uniforme, ideal para ñoquis, budines, sopas y postres tradicionales. Da cuerpo y consistencia sin grumos.',pr:[['400 g','Bolsón 10 × 400 g','7011'],['5 kg','Bolsa 5 kg','7005']]},
+ {id:102,n:'Trigo candeal pelado',c:'cer',ch:'sdfih',p:'Grano firme que mantiene la forma en cocciones largas.',d:'Trigo candeal pelado de sabor suave y gran rendimiento. Mantiene la textura en sopas, ensaladas tibias, guisos y postres como el trigo con leche.',pr:[['500 g','Bolsón 10 × 500 g','8000'],['5 kg','Bolsón 10 × 5 kg','8005'],['25 kg','Bolsa 25 kg','8030']]},
+ {id:94,n:'Trigo burgol',c:'cer',ch:'sdfh',p:'La base del tabule y de las ensaladas frescas.',d:'Trigo precocido, secado y partido, de textura liviana y sabor suave. Se prepara en poco tiempo y rinde en ensaladas, rellenos, kibbe y guarniciones.',pr:[['500 g','Bolsón 10 × 500 g','8100'],['5 kg','Bolsón 10 × 5 kg','8105'],['25 kg','Bolsa 25 kg','8130']]},
+ {id:91,n:'Maíz pelado blanco',c:'cer',ch:'sdfi',p:'El ingrediente del locro, en cinco formatos.',d:'Granos seleccionados, tiernos y parejos para locro, carbonada y pucheros. Su demanda se dispara en mayo y julio: es el producto estrella de las fechas patrias.',pr:[['400 g','Bolsón 10 × 400 g','3911'],['500 g','Bolsón 10 × 500 g','3900'],['1 kg','Bolsón 10 × 1 kg','3901'],['5 kg','Bolsa 5 kg','3905'],['25 kg','Bolsa 25 kg','3930']]},
+ {id:92,n:'Maíz pelado colorado',c:'cer',ch:'sdf',p:'Color y sabor marcado para recetas tradicionales.',d:'Maíz pelado colorado de sabor intenso, para guisos, sopas y preparaciones del norte argentino que buscan un perfil más auténtico.',pr:[['400 g','Bolsón 10 × 400 g','3811'],['5 kg','Bolsón 10 × 5 kg','3805'],['25 kg','Bolsa 25 kg','3830']]},
+ {id:101,n:'Maíz pisingallo',c:'cer',ch:'sdfh',p:'Estallido parejo y gran rendimiento por kilo.',d:'Pochoclos livianos y crocantes en minutos. Rinde en la casa, en kioscos, cines y eventos. Es uno de los productos Egran mejor valorados por los consumidores en Google.',pr:[['400 g','Bolsón 10 × 400 g','3611'],['5 kg','Bolsa 5 kg','3605'],['25 kg','Bolsa 25 kg','3630']]},
+ {id:96,n:'Avena tradicional',c:'cer',ch:'sdfih',p:'Versátil y rendidora para desayunos y panificados.',d:'Avena arrollada que conserva el sabor y el aporte del grano. Funciona en desayunos, granolas, galletitas y panificados, del hogar a la producción industrial.',pr:[['400 g','Bolsón 10 × 400 g','1404'],['3 kg','Bolsa 3 kg','1403'],['25 kg','Bolsa 25 kg','1430']]},
+ {id:97,n:'Avena instantánea',c:'cer',ch:'sdfih',p:'Lista en segundos para el desayuno de todos los días.',d:'Avena arrollada instantánea que se disfruta directamente con leche o yogur. Práctica para desayunos, colaciones, licuados y servicios de catering.',pr:[['350 g','Bolsón 10 × 350 g','1235'],['2 kg','Bolsa 2 kg','1203'],['25 kg','Bolsa 25 kg','1230']]},
+ {id:98,n:'Avena instantánea sin gluten',c:'cer',ch:'sdfih',sg:1,p:'La avena que pueden elegir los celíacos.',d:'Avena instantánea certificada libre de gluten, para porridge, licuados, granolas y panificados sin TACC. Una categoría en crecimiento que suma ticket en dietéticas y góndolas saludables.',pr:[['220 g','Bolsón 10 × 220 g','1312'],['15 kg','Bolsa 15 kg','1330']]},
+ {id:95,n:'Salvado de avena',c:'cer',ch:'sdhi',p:'Fibra para desayunos, panes y recetas saludables.',d:'Salvado de avena para sumar a yogures, licuados, panes caseros y mezclas de harinas. Un clásico de dietética con rotación constante.',pr:[['250 g','Bolsón 10 × 250 g','1725'],['25 kg','Bolsa 25 kg','1730']]},
+ {id:99,n:'Almidón de maíz',c:'cer',ch:'sdfih',sg:1,p:'Espesante de sabor neutro, del alfajor a la salsa.',d:'Almidón fino y versátil para espesar salsas, cremas y rellenos, y para dar suavidad a alfajores y panificados. Formatos para góndola, gastronomía e industria.',pr:[['200 g','Caja 3 × 200 g','1902'],['500 g','Caja 10 × 500 g','1900'],['25 kg','Bolsa 25 kg','1930']]},
+ {id:100,n:'Fécula de mandioca',c:'cer',ch:'sdfhi',sg:1,p:'Elasticidad y liviandad para el chipá y la panificación sin TACC.',d:'Ingrediente esencial para chipá, panes y premezclas libres de gluten. También funciona como espesante en preparaciones dulces y saladas.',pr:[['500 g',PEND,'']]},
+
+ {img:'bolsa',n:'Harina de lenteja',c:'har',ch:'idhf',sg:1,nuevo:1,p:'El sabor y el aporte de la lenteja en panes, pastas y premezclas.',d:'Harina de lenteja Sin TACC para panificados, pastas, rebozadores, hamburguesas vegetales y premezclas. Una base de legumbre para productos de alto valor agregado.',pr:[['25 kg','Bolsa 25 kg','']]},
+ {img:'bolsa',n:'Harina de arvejas',c:'har',ch:'idhf',sg:1,nuevo:1,p:'Base para sopas, rebozadores y productos plant-based.',d:'Harina de arvejas Sin TACC para sopas instantáneas, cremas, rebozadores y desarrollos plant-based. Color y sabor suaves que se integran fácil en la fórmula.',pr:[['25 kg','Bolsa 25 kg','']]},
+ {img:'bolsa',n:'Harina de garbanzos',c:'har',ch:'idhf',sg:1,nuevo:1,p:'Para fainá, falafel, rebozadores y premezclas sin TACC.',d:'Harina de garbanzos Sin TACC, la base del fainá y del falafel, muy buscada en gastronomía, dietéticas y cocina vegetariana.',pr:[['25 kg','Bolsa 25 kg','']]},
+ {img:'bolsa',n:'Harina de arroz',c:'har',ch:'idhf',sg:1,nuevo:1,p:'La base neutra de las premezclas sin TACC.',d:'Harina de arroz Sin TACC de sabor neutro, para panificados, rebozadores, espesantes y premezclas aptas para celíacos.',pr:[['25 kg','Bolsa 25 kg','']]},
+ {img:'bolsa',n:'Harinilla natural sin gluten',c:'har',ch:'idhf',sg:1,nuevo:1,p:'Harinilla Sin TACC para la industria de alimentos.',d:'Harinilla natural elaborada en nuestra línea Sin TACC, para formulaciones de panificados, snacks y premezclas libres de gluten.',pr:[['25 kg','Bolsa 25 kg','']]},
+ {img:'bolsa',n:'Harina de centeno',c:'har',ch:'idh',nuevo:1,p:'Para panes de masa madre, integrales y galletas.',d:'Harina de centeno para panes de masa madre, panes integrales, galletas y panificados de sabor intenso. Muy pedida por panaderías artesanales y dietéticas.',pr:[['25 kg','Bolsa 25 kg','']]},
+ {img:'bolsa',n:'Harina de soja',c:'har',ch:'idh',nuevo:1,p:'Valor proteico para panificados y formulaciones.',d:'Harina de soja para panificados, rebozadores y formulaciones industriales que buscan sumar aporte proteico y mejorar la textura.',pr:[['25 kg','Bolsa 25 kg','']]},
+ {img:'bolsa',n:'Harinilla natural',c:'har',ch:'id',nuevo:1,p:'Harinilla para la industria panificadora y de alimentos.',d:'Harinilla natural para formulaciones de panificados y alimentos, con la calidad pareja de una planta certificada FSSC 22000.',pr:[['25 kg','Bolsa 25 kg','']]},
+
+ {id:107,n:'Lentejas',c:'leg',ch:'sdfih',p:'Las más rendidoras: rotación asegurada todo el año.',d:'Lentejas de sabor intenso y color parejo para guisos, ensaladas tibias y hamburguesas caseras. La legumbre que nunca falta en la lista de compras.',pr:[['400 g','Bolsón 10 × 400 g','3401'],['5 kg','Bolsa 5 kg','3405'],['25 kg','Bolsa 25 kg','3430']]},
+ {id:108,n:'Lentejones',c:'leg',ch:'sdfh',p:'Grano grande que da cuerpo al plato.',d:'Lentejones de textura firme para guisos de cocción lenta, sopas, ensaladas y rellenos. Mantienen la forma y lucen en el plato.',pr:[['400 g','Bolsón 10 × 400 g','3301'],['5 kg','Bolsa 5 kg','3305'],['25 kg','Bolsa 25 kg','3330']]},
+ {id:106,n:'Garbanzos',c:'leg',ch:'sdfih',p:'Granos firmes y parejos, del hummus al guiso.',d:'Garbanzos seleccionados para hummus, guisos, ensaladas y falafel. Una legumbre en pleno crecimiento por la cocina vegetariana y mediterránea.',pr:[['500 g','Bolsón 10 × 500 g','2101'],['5 kg','Bolsa 5 kg','2105'],['25 kg','Bolsa 25 kg','2130']]},
+ {id:113,n:'Arvejas partidas',c:'leg',ch:'sdfi',p:'Textura suave para purés, sopas y rellenos.',d:'Arvejas partidas rendidoras para guisos, purés, sopas espesas y rellenos. Un clásico de invierno con gran salida en formatos grandes.',pr:[['500 g','Bolsón 10 × 500 g','901'],['5 kg','Bolsa 5 kg','905'],['25 kg','Bolsa 25 kg','930']]},
+ {id:114,n:'Arvejas enteras',c:'leg',ch:'sdf',nuevo:1,p:'El grano entero de siempre, para guisos y ensaladas.',d:'Arvejas secas enteras que conservan la textura del grano tras la cocción. Ideales para guisos, tartas y ensaladas frías.',pr:[['400 g',PEND,'']]},
+ {id:112,n:'Porotos alubia',c:'leg',ch:'sdfh',p:'Grano blanco de textura mantecosa.',d:'Porotos alubia para guisos, ensaladas, conservas caseras y dulces tradicionales. Un básico de almacén con rotación constante.',pr:[['500 g','Bolsón 10 × 500 g','5700'],['5 kg','Bolsa 5 kg','5703'],['25 kg','Bolsa 25 kg','5730']]},
+ {id:111,n:'Porotos bolita',c:'leg',ch:'sdf',p:'Grano chico y suave, el clásico del guiso de olla.',d:'Porotos bolita para locros, guisos de olla y platos de cuchara de la cocina argentina.',pr:[['500 g','Bolsón 10 × 500 g','5600'],['25 kg','Bolsa 25 kg','5630']]},
+ {id:109,n:'Porotos colorados',c:'leg',ch:'sdfh',p:'Color intenso para guisos, ensaladas y chili.',d:'Porotos colorados de textura firme para guisos, ensaladas, chili y preparaciones tradicionales.',pr:[['500 g','Bolsón 10 × 500 g','6300'],['5 kg','Bolsa 5 kg','6305'],['25 kg','Bolsa 25 kg','6330']]},
+ {id:110,n:'Porotos negros',c:'leg',ch:'sdfh',p:'Sabor intenso para la cocina latinoamericana.',d:'Porotos negros de textura cremosa para tacos, feijoada, ensaladas y guisos de estilo latinoamericano, cada vez más presentes en la gastronomía.',pr:[['500 g','Bolsón 10 × 500 g','6400'],['5 kg','Bolsa 5 kg','6405'],['25 kg','Bolsa 25 kg','6430']]},
+ {id:115,n:'Soja',c:'leg',ch:'sdhi',p:'Versátil para hamburguesas y cocina vegetariana.',d:'Porotos de soja para guisos, rellenos, hamburguesas y preparaciones vegetarianas y veganas.',pr:[['500 g','Bolsón 10 × 500 g','5900'],['5 kg','Bolsa 5 kg','5905'],['25 kg','Bolsa 25 kg','5930']]},
+ {id:116,n:'Jardinera',c:'leg',ch:'sdf',p:'Siete granos en un solo paquete para sopas y guisos.',d:'Mezcla de maíz pelado blanco y colorado, arvejas, trigo candeal, lentejas, garbanzos, arroz y cebada. Variedad y color en una sola compra.',pr:[['400 g','Bolsón 10 × 400 g','3111'],['25 kg','Bolsa 25 kg','3130']]},
+
+ {id:137,n:'Tutuca® azucarada tradicional',c:'snk',ch:'sdh',sg:1,nuevo:1,p:'El nuevo formato familiar de la Tutuca® de siempre.',d:'Maíz inflado azucarado, aireado y crocante, con dulzor equilibrado y 0 mg de sodio por porción. El paquete de 400 g que el consumidor busca por su nombre: Tutuca® es marca registrada de Egran.',pr:[['400 g',PEND,'']]},
+ {id:128,n:'Tutuca® acaramelada tradicional',c:'snk',ch:'sdh',sg:1,p:'El clásico crocante que se pide por su nombre.',d:'Maíz inflado acaramelado, el snack dulce que los argentinos conocen como Tutuca®. Formatos para el kiosco y la góndola.',pr:[['80 g','Caja 20 × 80 g','401'],['30 g','Caja 50 × 30 g','431']]},
+ {id:129,n:'Tutuca® con maní y miel',c:'snk',ch:'sdh',sg:1,p:'Maní y miel para una Tutuca® más completa.',d:'Maíz inflado acaramelado con maní y miel, para la merienda o una colación energética.',pr:[['80 g','Bolsón 20 × 80 g','404']]},
+ {id:130,n:'Tutuca® con coco',c:'snk',ch:'sdh',sg:1,p:'Un toque tropical en el kiosco.',d:'Maíz inflado acaramelado con coco, para una pausa dulce distinta.',pr:[['80 g','Bolsón 20 × 80 g','402']]},
+ {id:131,n:'Tutuca® con chocolate',c:'snk',ch:'sdh',sg:1,p:'Caramelo y chocolate en cada puñado.',d:'Maíz inflado acaramelado con sabor a chocolate, el favorito para compartir.',pr:[['80 g','Bolsón 20 × 80 g','403']]},
+ {id:117,n:'Barra crocante de arroz tradicional',c:'snk',ch:'sdhf',sg:1,p:'La barra liviana para la mochila, la oficina y el comedor.',d:'Barra de arroz inflado Sin TACC, práctica para colaciones y meriendas. Viene en formatos de exhibición para kiosco y en cajas grandes para comedores y viandas.',pr:[['20 g','Caja 150 × 20 g','512'],['20 g','4 cajas de 18 × 20 g','521'],['20 g','Caja 100 × 20 g','517'],['20 g','Caja 6 × 20 g','721'],['60 g','Caja 24 × 60 g','591']]},
+ {id:120,n:'Barra crocante de arroz con maní y miel',c:'snk',ch:'sdhf',sg:1,p:'La favorita de las familias, según las reseñas.',d:'Arroz inflado con maní y miel en una barra Sin TACC, ideal como snack energético antes o después de la actividad física.',pr:[['20 g','Caja 18 × 20 g','524'],['20 g','4 cajas de 150 × 20 g','514'],['20 g','Caja 6 × 20 g','724'],['60 g','Caja 24 × 60 g','594']]},
+ {id:118,n:'Barra crocante de arroz con chocolate',c:'snk',ch:'sdhf',sg:1,p:'El dulce que acompaña el mate y el café.',d:'Barra de arroz inflado con cacao, Sin TACC, para una pausa dulce en cualquier momento del día.',pr:[['20 g','4 cajas de 18 × 20 g','523'],['20 g','Caja 6 × 20 g','723'],['60 g','Caja 24 × 60 g','593']]},
+ {id:119,n:'Barra crocante de arroz con coco',c:'snk',ch:'sdh',sg:1,p:'El sabor distinto de la línea de barras.',d:'Barra de arroz inflado con coco, Sin TACC, para quienes buscan una opción crocante con otro sabor.',pr:[['60 g','Caja 24 × 60 g','597']]},
+ {id:122,n:'Barra de arroz Sport sabor naranja',c:'snk',ch:'sdh',sg:1,p:'Energía práctica para antes y después de entrenar.',d:'Barra de arroz Sin TACC pensada para rutinas activas. Ideal para gimnasios, clubes y kioscos cercanos a escuelas.',pr:[['30 g','Caja 18 × 30 g','527']]},
+ {id:123,n:'Barra de arroz Slim con frutilla',c:'snk',ch:'sdh',sg:1,p:'Liviana, para cuidar las porciones sin resignar sabor.',d:'Barra de arroz Sin TACC sabor frutilla en formato de 20 g, una colación liviana entre comidas.',pr:[['20 g','4 cajas de 18 × 20 g','528']]},
+ {id:121,n:'Barra de arroz Forte con calcio y zinc',c:'snk',ch:'sdhf',sg:1,p:'Fortificada para sumar valor a la colación.',d:'Barra de arroz Sin TACC fortificada, una opción práctica para colaciones escolares y programas alimentarios.',pr:[['20 g','4 cajas de 18 × 20 g','']]},
+ {id:124,n:'Crocante de maní',c:'snk',ch:'sdh',sg:1,p:'Energía rápida a base de maní y arroz inflado.',d:'Crocante de maní, arroz inflado y miel, Sin TACC, en formato de 85 g para colaciones y meriendas.',pr:[['85 g','Caja 28 × 85 g','580']]},
+ {id:125,n:'Torta de maní, almendra y miel',c:'snk',ch:'sdh',sg:1,p:'Frutos secos y miel en una torta crocante Sin TACC.',d:'Torta crocante de maní, almendras, arroz inflado y miel, apta para celíacos. Ideal para acompañar el café o el mate.',pr:[['150 g','Caja 20 × 150 g','505']]},
+ {id:126,n:'Arroz inflado dulce',c:'snk',ch:'sdhi',sg:1,p:'Liviano y listo para comer, solo o con leche.',d:'Arroz inflado dulce Sin TACC, base de desayunos, meriendas y barras caseras.',pr:[['80 g','Bolsón 20 × 80 g','509']]},
+ {id:127,n:'Arroz integral Yamaní inflado',c:'snk',ch:'sdhi',sg:1,p:'El valor del grano integral, en formato crocante.',d:'Arroz integral Yamaní inflado Sin TACC, listo para consumir con leche, yogur o como topping de ensaladas y postres. Un producto buscado en dietéticas.',pr:[['80 g','Bolsón 20 × 80 g','499']]},
+
+ {id:105,n:'Locro listo',c:'com',ch:'sdf',p:'El clásico argentino, listo para calentar y servir.',d:'Locro elaborado con maíz pelado y legumbres Egran, en envase de 500 g. Se calienta en microondas y resuelve un plato tradicional en minutos.',pr:[['500 g','Caja 12 × 500 g','9201']]},
+ {id:104,n:'Guiso de lentejas listo',c:'com',ch:'sdf',p:'Sabor casero en minutos, en la góndola y en la cocina.',d:'Guiso de lentejas listo para calentar en microondas u olla, en envase de 500 g. Un plato principal rendidor para almuerzo o cena.',pr:[['500 g','Caja 12 × 500 g','9200']]}
+];
+
+P.forEach((x,i)=>{x.k=i; if(!x.img) x.img='img/p'+x.id+'.webp';});
+
+const $=s=>document.querySelector(s);
+const st={canal:null,cat:'all',sg:false,q:''};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('#n-prod').textContent=P.length; $('#n-pres').textContent=P.reduce((a,p)=>a+p.pr.length,0);
+
+function foto(p){
+  if(p.img==='bolsa') return `<div class="bolsa"><span class="lg">EGRAN</span><span class="nm">${esc(p.n)}</span><span class="kg">25 kg</span></div>`;
+  return `<img src="${p.img}" alt="${esc(p.n)} Egran">`;
+}
+function badges(p){
+  let b=''; if(p.sg) b+='<span class="badge b-sg">Sin TACC</span>'; if(p.nuevo) b+='<span class="badge b-new">Nuevo</span>';
+  if(p.c==='har') b+='<span class="badge b-25">Granel 25 kg</span>';
+  return `<span class="badges">${b}</span>`;
+}
+
+$('#canales').innerHTML=Object.entries(CANALES).map(([k,c])=>`<button type="button" class="canal" data-k="${k}" aria-pressed="false">${ICONS[c.ico]}<span class="q">${c.q}</span><span class="who"><span>${c.n}</span></span></button>`).join('');
+document.querySelectorAll('.canal').forEach(b=>b.addEventListener('click',()=>setCanal(b.dataset.k,true)));
+$('#ver-todo').addEventListener('click',()=>{setCanal(null,false);$('#indice').scrollIntoView()});
+function setCanal(k,scroll){
+  st.canal=k; st.cat='all';
+  document.querySelectorAll('.canal').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.k===k)));
+  const v=$('#canal-vista');
+  if(k){
+    const c=CANALES[k]; v.hidden=false;
+    $('#canal-intro').innerHTML=`<div><p class="kicker">${c.n}</p><h2>${c.titulo}</h2><p class="txt">${c.txt}</p></div><ul>${c.pts.map(t=>`<li>${t}</li>`).join('')}</ul><div class="mix"><b>Surtido sugerido para arrancar:</b>${c.mix.map(m=>`<span>${m}</span>`).join('')}</div>`;
+    $('#cat-titulo').textContent='Productos para '+c.n.toLowerCase(); $('#ind-titulo').textContent='Edición '+c.n.toLowerCase(); $('#ed-pill').textContent='Edición '+c.n; $('#ed-pill').hidden=false;
+    $('#marca-blanca').hidden=!(k==='s'||k==='d');
+    try{history.replaceState(null,'','#'+c.id)}catch(e){}
+    if(scroll) $('#indice').scrollIntoView();
+  } else {
+    v.hidden=true; $('#cat-titulo').textContent='Todos nuestros productos'; $('#ind-titulo').textContent='Edición completa'; $('#ed-pill').hidden=true; $('#marca-blanca').hidden=false;
+    try{history.replaceState(null,'',location.pathname)}catch(e){}
+  }
+  render();
+}
+
+function renderFiltros(){
+  const base=P.filter(p=>!st.canal||p.ch.includes(st.canal));
+  const opts=[['all','Todos']].concat(Object.entries(CATS).filter(([k])=>base.some(p=>p.c===k)));
+  $('#filtros').innerHTML=opts.map(([k,n])=>`<button type="button" class="chip" data-c="${k}" aria-pressed="${st.cat===k}">${n}</button>`).join('')+`<button type="button" class="chip sg" data-sg="1" aria-pressed="${st.sg}">Solo Sin TACC</button>`;
+  document.querySelectorAll('#filtros .chip').forEach(b=>b.addEventListener('click',()=>{ if(b.dataset.sg){st.sg=!st.sg}else{st.cat=b.dataset.c} render(); }));
+}
+function filtrar(){
+  const q=st.q.trim().toLowerCase();
+  return P.filter(p=>(!st.canal||p.ch.includes(st.canal))&&(st.cat==='all'||p.c===st.cat)&&(!st.sg||p.sg)&&(!q||p.n.toLowerCase().includes(q)||p.pr.some(r=>r[2]&&r[2].startsWith(q))||CATS[p.c].toLowerCase().includes(q)));
+}
+function card(p){
+  return `<button type="button" class="card" data-k="${p.k}" aria-label="Ver presentaciones y códigos de ${esc(p.n)}"><span class="foto">${foto(p)}${badges(p)}</span><span class="info"><span class="pn">${esc(p.n)}</span><span class="pitch">${esc(p.p)}</span><span class="fmts">${[...new Set(p.pr.map(r=>r[0]))].map(f=>`<span>${f}</span>`).join('')}</span><span class="ver">Ver bultos y códigos</span></span></button>`;
+}
+function render(){
+  renderFiltros();
+  const L=filtrar();
+  const enCanal=P.filter(p=>!st.canal||p.ch.includes(st.canal));
+  $('#cat-sub').textContent=`${enCanal.length} productos y ${enCanal.reduce((a,p)=>a+p.pr.length,0)} presentaciones. Tocá un producto para ver bultos y códigos.`;
+  let orden=Object.keys(CATS); if(st.canal==='i'||st.canal==='h') orden=['har',...orden.filter(c=>c!=='har')];
+  let nro=0; const caps=[];
+  const html=orden.map(c=>{const g=L.filter(p=>p.c===c); if(!g.length) return ''; nro++; const n=String(nro).padStart(2,'0'); caps.push(`<li><a href="#cap-${c}"><span class="nro">${n}</span><span class="nom">${CATS[c]}</span><span class="cant">${g.length} productos · ${g.reduce((a,p)=>a+p.pr.length,0)} presentaciones</span><span class="fl">→</span></a></li>`); return `<div class="grupo" id="cap-${c}"><h3><span class="nro">${n}</span> ${CATS[c]} <small>${g.length} productos</small></h3><div class="grilla">${g.map(card).join('')}</div></div>`}).join('');
+  $('#caps').innerHTML=caps.join('')||'<li class="cant" style="padding:12px 0">Sin resultados para esta búsqueda.</li>';
+  $('#grupos').innerHTML=html||`<div class="vacio">No encontramos productos con esa búsqueda. Probá con otro nombre o con el código de la presentación.</div>`;
+  document.querySelectorAll('.card').forEach(b=>b.addEventListener('click',()=>abrir(+b.dataset.k)));
+}
+$('#q').addEventListener('input',e=>{st.q=e.target.value;render()});
+
+function abrir(k){
+  const p=P[k], f=$('#ficha');
+  f.innerHTML=`<button type="button" class="cerrar" id="cerrar">Cerrar</button>
+  <div class="ffoto">${foto(p)}${badges(p)}</div>
+  <div><p class="cat">${CATS[p.c]}</p><h3 id="ficha-t">${esc(p.n)}</h3></div>
+  <p class="pitch">${esc(p.p)}</p>
+  <p class="desc">${esc(p.d)}</p>
+  <div class="tabla"><table><thead><tr><th>Presentación</th><th>Bulto</th><th>Código</th></tr></thead><tbody>${p.pr.map(r=>`<tr><td>${r[0]}</td>${r[1]===PEND?'<td class="pend">Bulto a confirmar</td>':`<td>${r[1]}</td>`}${r[2]?`<td class="cod">${r[2]}</td>`:'<td class="pend">Código a confirmar</td>'}</tr>`).join('')}</tbody></table></div>
+  <div class="ideal">Ideal para ${[...p.ch].map(c=>`<span>${CANALES[c].n}</span>`).join('')}</div>
+  ${p.sg?'<p class="nota">Producto Sin TACC, con el símbolo oficial en el envase.</p>':''}`;
+  $('#velo').hidden=false; f.hidden=false; f.scrollTop=0;
+  $('#cerrar').addEventListener('click',cerrar); $('#cerrar').focus({preventScroll:true});
+}
+function cerrar(){ $('#ficha').hidden=true; $('#velo').hidden=true; }
+$('#velo').addEventListener('click',cerrar);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') cerrar(); });
+
+const h=location.hash.replace('#','');
+const desde=Object.entries(CANALES).find(([k,c])=>c.id===h);
+if(desde) setCanal(desde[0],false); else render();
+</script>
+
+</body>
+</html>
